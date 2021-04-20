@@ -1,0 +1,6 @@
+.nav {
+  background-color: linear-gradient(to right, #ec5f56, #d6324a);
+  -webkit-animation: Gradient 15s ease infinite;
+  -moz-animation: Gradient 15s ease infinite;
+  animation: Gradient 15s ease infinite;
+}
