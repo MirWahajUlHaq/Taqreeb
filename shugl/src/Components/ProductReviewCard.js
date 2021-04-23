@@ -14,13 +14,14 @@ import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import { CardActionArea } from '@material-ui/core';
-import {useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 250,
-    marginLeft:'25px',
-    marginTop:'1.5rem'
+    marginLeft: '25px',
+    marginTop: '1.5rem'
 
   },
   media: {
@@ -45,18 +46,18 @@ const useStyles = makeStyles((theme) => ({
 export default function ProductReviewCard(props) {
   const classes = useStyles();
   let history = useHistory();
-  if(props.id==='shamsi') {
+  if (props.id === 'shamsi') {
     history.push(`/view/${props.id}`)
   }
   else if (props.id === 'dua') {
     history.push(`/view/${props.id}`)
   }
 
-  else if(props.id === 'jb') {
+  else if (props.id === 'jb') {
     history.push(`/view/${props.id}`)
   }
 
-  else if(props.id === 'hanif') {
+  else if (props.id === 'hanif') {
     history.push(`/view/${props.id}`)
   }
   else if (props.id === 'united') {
@@ -67,44 +68,46 @@ export default function ProductReviewCard(props) {
     history.push(`/view/${props.id}`)
   }
 
-  
+
   return (
-    
-      <Card className={classes.root} style={{borderRadius:'10px 10px', marginBottom:'2rem'}}>
+
+    <Card className={classes.root} style={{ borderRadius: '10px 10px', marginBottom: '2rem' }}>
+      <Link to='/view/productPage'>
         <CardActionArea>
-        <CardMedia
-          style = {{width:250}}
-          className={classes.media}
-          image={props.imgUrl}
-          title="Paella dish"
-        />
-        <div className='row' style={{marginLeft:'0.05rem', marginTop:'0.5rem', maxWidth:220}}>
+          <CardMedia
+            style={{ width: 250 }}
+            className={classes.media}
+            image={props.imgUrl}
+            title="Paella dish"
+          />
+          <div className='row' style={{ marginLeft: '0.05rem', marginTop: '0.5rem', maxWidth: 220 }}>
             <div className='col col-md-5'>
-              <h5 style={{fontWeight:'bold'}}>{props.name}</h5>
+              <h5 style={{ fontWeight: 'bold', color: 'black' }}>{props.name}</h5>
             </div>
             <div className='col col-md-3 offset-md-3'>
-                <h6 style ={{marginTop:'0.4rem', color:'grey'}}>{props.price}</h6>
+              <h6 style={{ marginTop: '0.4rem', color: 'grey' }}>{props.price}</h6>
             </div>
-        </div>
-        <div className='row' style = {{maxWidth:250}}>
-        <div className='col col-md-7'>
-          <CardHeader
-            subheader={props.address.substring(0,15)  }
-          />
-        </div>
-        <div className='col col-md-4'>
-          <CardActions disableSpacing>
-            <IconButton aria-label="add to favorites">
-              <FavoriteIcon />
-            </IconButton>
-            <IconButton aria-label="share">
-              <ShareIcon />
-            </IconButton>
-          </CardActions>
           </div>
-        </div>
+          <div className='row' style={{ maxWidth: 250 }}>
+            <div className='col col-md-7'>
+              <CardHeader
+                subheader={props.address.substring(0, 15)}
+              />
+            </div>
+            <div className='col col-md-4'>
+              <CardActions disableSpacing>
+                <IconButton aria-label="add to favorites">
+                  <FavoriteIcon />
+                </IconButton>
+                <IconButton aria-label="share">
+                  <ShareIcon />
+                </IconButton>
+              </CardActions>
+            </div>
+          </div>
         </CardActionArea>
-      </Card>
-    
+      </Link>
+    </Card>
+
   );
 }
