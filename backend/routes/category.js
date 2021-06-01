@@ -7,7 +7,7 @@ const { create, categoryById, read, update, remove, list } = require('../control
 const { requireSignin, isAuth, isAdmin } = require('../controllers/auth')
 const { userById } = require('../controllers/user')
 
-var storage = multer.diskStorage({
+const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, './uploads')
   },
@@ -20,14 +20,14 @@ var storage = multer.diskStorage({
   }
 })
 
-var upload = multer({
+const upload = multer({
   storage: storage,
   limits: { fileSize: 1000000 }
 })
 
 
 
-router.post('/category/create/:userId', requireSignin, isAuth, isAdmin, upload.single('category_image'), create);
+router.post('/category/create',create);
 router.post('/category/categoryId/:userId', requireSignin, isAuth, isAdmin, upload.single('category_image'), update);
 router.delete('/category/categoryId/:userId', requireSignin, isAuth, isAdmin, upload.single('category_image'), remove);
 router.get('/category/:categoryId', read)

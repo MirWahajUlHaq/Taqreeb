@@ -1,7 +1,14 @@
+<<<<<<< HEAD
+import { global } from "../config";
+//This method sends the data to the backend
+export const createCategory = (userId, token, category) => {
+    return fetch(`${global.API_HOST}/category/create/${userId}`, {
+=======
 import { API } from "../config";
 //This method sends the data to the backend
 export const createCategory = (userId, token, category) => {
     return fetch(`${API}/category/create/${userId}`, {
+>>>>>>> 75f5a1e0c16b8139c352adf3fb6cd94a263766dc
             method:'POST',
             headers: {
                     Accept:'application/json',
@@ -19,7 +26,11 @@ export const createCategory = (userId, token, category) => {
 }
 
 export const createProduct = (userId, token, product) => {
+<<<<<<< HEAD
+    return fetch(`${global.API_HOST}/category/create/${userId}`, {
+=======
     return fetch(`${API}/category/create/${userId}`, {
+>>>>>>> 75f5a1e0c16b8139c352adf3fb6cd94a263766dc
             method:'POST',
             headers: {
                     Accept:'application/json',
@@ -36,7 +47,11 @@ export const createProduct = (userId, token, product) => {
 }
 
 export const getCategories = () => {
+<<<<<<< HEAD
+        return fetch(`${global.API_HOST}/categories`, {
+=======
         return fetch(`${API}/categories`, {
+>>>>>>> 75f5a1e0c16b8139c352adf3fb6cd94a263766dc
                 method:'GET'
         })
         .then(response => {

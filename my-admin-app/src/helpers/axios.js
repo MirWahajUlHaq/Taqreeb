@@ -5,7 +5,7 @@ import { authConstants } from '../actions/constants';
 
 const token = window.localStorage.getItem('token');
 
-const axiosIntance = axios.create({
+const axiosInstance = axios.create({
     baseURL: api,
     /*headers: {
         'Authorization': token ? `Bearer ${token}` : ''
@@ -33,4 +33,4 @@ axiosIntance.interceptors.response.use((res) => {
     */
 })
 
-export default axiosIntance;
+export default axiosInstance;

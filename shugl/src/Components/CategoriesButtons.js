@@ -28,6 +28,30 @@ export default function IconLabelButtons(props) {
 
   const routeChange = () => {
 
+<<<<<<< HEAD
+    if (props.id === 'Farmhouses') {
+      history.push('/view/farmhouse')
+    }
+    else if (props.id === 'Beach Hut') {
+      history.push('/view/beachhut')
+    }
+    else if (props.id === 'Hotels') {
+      history.push('/view/hotel')
+    }
+    else if (props.id === 'Caterers') {
+      history.push('/view/caterer')
+    }
+    else if (props.id === 'Event Decorators') {
+      history.push('/view/eventdecorator')
+    }
+    else if (props.id === 'Photogrphers') {
+      history.push('/view/photographer')
+    }
+    else if (props.id === 'Transporation') {
+      history.push('/view/transport')
+    }
+    else if (props.id === 'Lawns and Banquets') {
+=======
     if (props.id === 'farmhouse') {
       history.push('/view/farmhouse')
     }
@@ -50,6 +74,7 @@ export default function IconLabelButtons(props) {
       history.push('/view/transport')
     }
     else if (props.id === 'lawnandbanquet') {
+>>>>>>> 75f5a1e0c16b8139c352adf3fb6cd94a263766dc
       history.push('/view/lawnandbanquet')
 
     }

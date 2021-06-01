@@ -1,34 +1,33 @@
 const Category = require('../models/category')
 const { errorHandler } = require('../helpers/dbErrorHandler')
-const slugify = require('slugify')
+// const slugify = require('slugify')
 
 exports.create = (req, res) => {
     const categoryObj = {
         name: req.body.name,
-        slug: slugify(req.body.name),
-        categoryImage: ''
-
+        // slug: `${slugify(req.body.name)}-${shortid.generate()}`
     }
 
-    if (req.file) {
-        categoryObj.categoryImage = process.env.API + '/public/' + req.file.originalname;
-        console.log(categoryObj)
-    }
+    // if (req.file) {
+    //     // categoryObj.categoryImage = process.env.API + '/public/' + req.file.originalname;
+    //     // console.log(categoryObj)
+    //     categoryObj.categoryImage = "/public/" + req.file.filename;
+    // }
 
 
-    const cat = new Category(categoryObj)
+    const cat = new Category(categoryObj);
     console.log(cat)
     cat.save((err, category) => {
         if (err) {
             return res.status(400).json({
-                error: errorHandler(err)
+                err
             })
         }
         if (category) {
-            res.status(201).json({ category })
+            return res.status(201).json({ category });
         }
-    })
-}
+    });
+};
 
 
 exports.categoryById = (req, res, next, id) => {

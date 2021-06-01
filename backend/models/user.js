@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
     },
     username: {
         type: String,
-        required: true,
+        // required: true,
         trim: true,
         unique: true,
         index: true,
@@ -51,8 +51,7 @@ const userSchema = new mongoose.Schema({
     },
     salt: String,
     role: {
-        type: Number,
-        default: 0
+        type: Number
     },
     history: {
         type: Array,
@@ -72,12 +71,16 @@ userSchema.virtual('password')
         return this._password
     })
 
+    userSchema.virtual("fullName").get(function () {
+        return `${this.firstName}${this.lastName}`;
+      });
+
 //we can create schema methods. encryptPassword is in of itself a method
 //sha1 is a method of encrypting the password
 userSchema.methods = {
 
-    authenticate: function (plainText) {
-        return this.encryptPassword(plainText) === this.hashed_password;
+    authenticate: function (password) {
+        return this.encryptPassword(password) === this.hashed_password;
     },
 
     encryptPassword: function (password) {

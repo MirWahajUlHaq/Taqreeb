@@ -3,15 +3,15 @@ const { errorHandler } = require('../helpers/dbErrorHandler')
 const shortid = require('shortid')
 const slugify = require('slugify')
 const _ = require('lodash')
-const formidable = require('formidable')
 
 
+var ObjectId = require('mongodb').ObjectId;
 
 exports.createProduct = (req, res) => {
     console.log(req.body)
 
     const { name, price, description, category, createdBy } = req.body
-    if (!name || !price || !description || !category) {
+    if (!name || !price || !description || !category || !createdBy) {
         return res.status(400).json({
             error: "All fields are required"
         })
@@ -31,7 +31,7 @@ exports.createProduct = (req, res) => {
         description,
         productPictures,
         category,
-        createdBy: req.profile._id
+        createdBy: req.user._id
     })
 
     product.save(((err, product) => {
@@ -40,6 +40,7 @@ exports.createProduct = (req, res) => {
                 err
             })
         }
+        if(product)
         res.status(200).json({
             product
         })
@@ -49,23 +50,23 @@ exports.createProduct = (req, res) => {
 }
 
 
-exports.productById = (req, res, next, id) => {
-    Product.findById(id).exec((err, product) => {
-        if (err || !product) {
-            return res.status(400).json({
-                error: "Product Not Found"
-            })
-        }
-        req.product = product
-        next()
-    })
-}
+// exports.productById = (req, res, next, id) => {
+//     Product.findById(id).exec((err, product) => {
+//         if (err || !product) {
+//             return res.status(400).json({
+//                 error: "Product Not Found"
+//             })
+//         }
+//         req.product = product
+//         next()
+//     })
+// }
 
 
-exports.read = (req, res) => {
-    req.product.photo = undefined
-    return res.json(req.product)
-}
+// exports.read = (req, res) => {
+//     req.product.photo = undefined
+//     return res.json(req.product)
+// }
 
 
 exports.remove = (req, res) => {
@@ -109,3 +110,17 @@ exports.update = (req, res) => {
         })
     })
 }
+
+exports.getProducts = async (req, res) => {
+
+    const vendorId = req.decoded._id;
+
+
+
+    const products = await Product.find({ "createdBy": ObjectId(vendorId) })
+      .select("name price description productPictures category")
+      .populate({ path: "category", select: "_id name" })
+      .exec();
+  
+    res.status(200).json({ products });
+  };

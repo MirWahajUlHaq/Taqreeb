@@ -13,11 +13,13 @@ require("dotenv").config();
 
 //import routes
 const authRoutes = require("./routes/auth");
+const adminRoutes = require("./routes/admin/auth");
+const vendorRoutes = require("./routes/vendor/auth");
 const userRoutes = require("./routes/user");
 const categoryRoutes = require("./routes/category");
 const productRoutes = require("./routes/product");
 const cartRoutes = require("./routes/cart");
-
+// const initialDataRoutes = require("./routes/admin/initialData");
 //db
 mongoose
   .connect(process.env.DATABASE, {
@@ -40,12 +42,17 @@ app.use(
 app.use(cookieParser());
 app.use(expressValidator());
 //routes middleware
+app.use("/api", adminRoutes);
+app.use("/api", vendorRoutes);
 app.use("/api", authRoutes);
-app.use("/api", userRoutes);
+// app.use("/api", userRoutes);
 app.use("/api", categoryRoutes);
 app.use("/api", productRoutes);
 app.use("/api", cartRoutes);
-const port = process.env.PORT || 8000;
+// app.use("/api", initialDataRoutes);
+
+
+const port = process.env.PORT;
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

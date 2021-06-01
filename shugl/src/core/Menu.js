@@ -14,7 +14,16 @@ const isActive = (history, path) => {
     
 }
 
+
 const Menu = (props) => {
+    var userData = false;
+
+    if(localStorage.getItem('token')){
+          userData = true;
+    }else{
+         userData = false;
+    }
+
     return (
         <div>
             <ul className='nav nav-tabs' style={{backgroundColor:'#D6324A'}}>
@@ -28,26 +37,26 @@ const Menu = (props) => {
                     <Link className='nav-link' style={isActive(props.history, '/about')} to='/about'>About</Link>
                 </li>
 
-                {isAuthenticated() && isAuthenticated().user.role ===0 && (
+                {/* {isAuthenticated() && isAuthenticated().role ===0 && (
                     <li className='nav-item'>
                     <Link className='nav-link' style={isActive(props.history, '/user/profile')} to='/user/profile'>Profile</Link>
                 </li>
                 )} 
 
-                {isAuthenticated() && isAuthenticated().user.role ===1 && (
+                {isAuthenticated() && isAuthenticated().role ===1 && (
                     <li className='nav-item'>
                     <Link className='nav-link' style={isActive(props.history, '/admin/dashboard')} to='/admin/dashboard'>Admin Dashboard</Link>
                 </li>
                 )}
 
-                {isAuthenticated() && isAuthenticated().user.role ===2 && (
+                {isAuthenticated() && isAuthenticated().role ===2 && (
                     <li className='nav-item'>
                     <Link className='nav-link' style={isActive(props.history, '/vendor/dashboard')} to='/vendor/dashboard'>Vendor Dashboard</Link>
                 </li>
-                )}    
+                )}     */}
                 
 
-                {!isAuthenticated() && (
+                {!userData && (
                     <Fragment>
                         <li className='nav-item'>
                             <Link className='nav-link' style={isActive(props.history, '/signin')} to='/signin'>Sign In</Link>
@@ -57,16 +66,15 @@ const Menu = (props) => {
                         </li>
                     </Fragment>
                 )}
-                {isAuthenticated() &&(
+                {userData &&(
                     <div>
                         <li className='nav-item'>
                     <span 
                     className='nav-link' 
                     style={{cursor:'pointer', color:'#ffffff'}} 
                     onClick={
-                        ()=>signout(()=>{
-                        props.history.push('/');
-                    })} >Signout</span>
+                        signout    
+                    } >Signout</span>
                 </li>
                     </div>
                 )}

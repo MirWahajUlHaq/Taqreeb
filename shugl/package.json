@@ -9,9 +9,17 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+<<<<<<< HEAD
+    "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
     "bootstrap-steps": "^1.0.3",
     "builder": "^5.0.0",
+    "dotenv": "^10.0.0",
+=======
+    "bootstrap": "^4.6.0",
+    "bootstrap-steps": "^1.0.3",
+    "builder": "^5.0.0",
+>>>>>>> 75f5a1e0c16b8139c352adf3fb6cd94a263766dc
     "formik": "^2.2.6",
     "react": "^17.0.2",
     "react-bootstrap": "^1.5.2",
@@ -22,6 +30,10 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-step": "^0.4.1",
+<<<<<<< HEAD
+    "react-toastify": "^4.1.0",
+=======
+>>>>>>> 75f5a1e0c16b8139c352adf3fb6cd94a263766dc
     "web-vitals": "^1.0.1"
   },
   "scripts": {
