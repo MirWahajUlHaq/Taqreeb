@@ -13,23 +13,65 @@ import { FaShuttleVan, FaCamera } from 'react-icons/fa';
 import { GiHut, GiBalloons } from 'react-icons/gi'
 import HotelIcon from '@material-ui/icons/Hotel';
 import FastfoodIcon from '@material-ui/icons/Fastfood';
+import { global } from "../config";
 
-const categories = () => (
-    <div className='container' style={{ marginBottom: '2rem' }}>
-        <h3>Categories</h3>
-        <div className='row'>
-            <CategoriesButtons id='beachHut' startIcon={<GiHut />} name='Beach Hut' />
-            <CategoriesButtons id='transport' startIcon={<FaShuttleVan />} name='Transporation' />
-            <CategoriesButtons id='hotel' startIcon={<HotelIcon />} name='Hotels' />
-            <CategoriesButtons id='photographer' startIcon={<FaCamera />} name='Photogrphers' />
-            <CategoriesButtons id='caterer' startIcon={<FastfoodIcon />} name='Caterers' />
-            <CategoriesButtons id='lawnandbanquet' startIcon={<HotelIcon />} name='Lawns and Banquets' />
-            <CategoriesButtons id='farmhouse' startIcon={<HotelIcon />} name='Farmhouses' />
-            <CategoriesButtons id='eventdecorator' startIcon={<GiBalloons />} name='Event Decorators' />
-        </div>
-    </div>
-)
+
 export const LawnAndBanuqet = () => {
+
+    const [category, setCategory] = useState([]);
+    const [lawns, setLawns] = useState([]);
+
+    useEffect(() => {
+        getCategories();
+        getLawns();
+      },[]);
+
+      const getCategories = () => {
+        fetch(`${global.API_HOST}user/getCategory`, {
+          method: "POST",
+        })
+          .then((res) => res.json())
+          .then((response) => {
+            if(response.status == true){
+              setCategory(response.data);
+            }
+          })
+          .catch((err) => console.log(err));
+      };
+
+      const getLawns = () => {
+        fetch(`${global.API_HOST}user/getCategory/lawn`, {
+          method: "POST",
+        })
+          .then((res) => res.json())
+          .then((response) => {
+            if (response.status == true) {
+                setLawns(response.data);
+            }
+          })
+          .catch((err) => console.log(err));
+      };
+
+
+    const categories = () => (
+        <div className='container' style={{marginBottom:'2rem'}}>
+            <h3>Categories</h3>
+            {category && category.length > 0 && (
+            <div className='row'>
+            {category.map((cat, index) => (
+                  <CategoriesButtons
+                    id={cat.categoryName}
+                    startIcon={<GiHut />}
+                    name={cat.categoryName}
+                    key={index}
+                  />
+    
+                  ))}
+               
+            </div>
+              )}
+        </div>
+    )
 
     /*const [categories, setCategories] = useState([])
     const [error, setError] = useState(false)
@@ -128,26 +170,21 @@ export const LawnAndBanuqet = () => {
                 <div className='col col-md-8'>
                     {categories()}
                     <h3>All</h3>
-                    <div className='row'>
-                        <ProductReviewCard name="Event Decorator 1 " price='1300' imgUrl={Caterer1} address="Malir, Karachi" description='This impressive paella is a perfect party dish and a fun meal to cook together with your guests Add one cup of frozen peas along with the mussels if you like' />
-                        <ProductReviewCard name="Event Decorator 2" price='1200' imgUrl={Caterer2} address="Super Highway, Karachi" description='This impressive paella is a perfect party dish and a fun meal to cook together with your guests. Add 1 cup of frozen peas along with the mussels, if you like.' />
-                        <ProductReviewCard name="Event Decorator 3" price='1100' imgUrl={Caterer3} address="Super Highway, Karachi" description='This impressive paella is a perfect party dish and a fun meal to cook together with your guests. Add 1 cup of frozen peas along with the mussels, if you like.' />
-                    </div>
-                    <div className='row'>
-                        <ProductReviewCard name="Event Decorator 4 " price='1300' imgUrl={Caterer1} address="Malir, Karachi" description='This impressive paella is a perfect party dish and a fun meal to cook together with your guests Add one cup of frozen peas along with the mussels if you like' />
-                        <ProductReviewCard name="Event Decorator 5" price='1200' imgUrl={Caterer2} address="Super Highway, Karachi" description='This impressive paella is a perfect party dish and a fun meal to cook together with your guests. Add 1 cup of frozen peas along with the mussels, if you like.' />
-                        <ProductReviewCard name="Event Decorator 6" price='1100' imgUrl={Caterer3} address="Super Highway, Karachi" description='This impressive paella is a perfect party dish and a fun meal to cook together with your guests. Add 1 cup of frozen peas along with the mussels, if you like.' />
-                    </div>
-                    <div className='row'>
-                        <ProductReviewCard name="Event Decorator 7" price='1300' imgUrl={Caterer1} address="Malir, Karachi" description='This impressive paella is a perfect party dish and a fun meal to cook together with your guests Add one cup of frozen peas along with the mussels if you like' />
-                        <ProductReviewCard name="Event Decorator 8" price='1200' imgUrl={Caterer2} address="Super Highway, Karachi" description='This impressive paella is a perfect party dish and a fun meal to cook together with your guests. Add 1 cup of frozen peas along with the mussels, if you like.' />
-                        <ProductReviewCard name="Event Decorator 9" price='1100' imgUrl={Caterer3} address="Super Highway, Karachi" description='This impressive paella is a perfect party dish and a fun meal to cook together with your guests. Add 1 cup of frozen peas along with the mussels, if you like.' />
-                    </div>
-                    <div className='row'>
-                        <ProductReviewCard name="Event Decorator 10" price='1300' imgUrl={Caterer1} address="Malir, Karachi" description='This impressive paella is a perfect party dish and a fun meal to cook together with your guests Add one cup of frozen peas along with the mussels if you like' />
-                        <ProductReviewCard name="Event Decorator 11" price='1200' imgUrl={Caterer2} address="Super Highway, Karachi" description='This impressive paella is a perfect party dish and a fun meal to cook together with your guests. Add 1 cup of frozen peas along with the mussels, if you like.' />
-                        <ProductReviewCard name="Event Decorator 12" price='1100' imgUrl={Caterer3} address="Super Highway, Karachi" description='This impressive paella is a perfect party dish and a fun meal to cook together with your guests. Add 1 cup of frozen peas along with the mussels, if you like.' />
-                    </div>
+                    {lawns && lawns.length > 0 && (
+        <div className="row">
+          {lawns.map((lawnsPro, index) => (
+            <ProductReviewCard
+              name={lawnsPro.productName}
+              price={`${lawnsPro.productPrice}/-per person`}
+              imgUrl={global.imgUrl + lawnsPro.productImage}
+              // address="Malir, Karachi"
+              url={lawnsPro._id}
+              description={lawnsPro.description}
+              key={index}
+            />
+          ))}
+        </div>
+      )}
 
                 </div>
             </div>

@@ -7,6 +7,7 @@ import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import KeyboardVoiceIcon from '@material-ui/icons/KeyboardVoice';
 import Icon from '@material-ui/core/Icon';
 import SaveIcon from '@material-ui/icons/Save';
+import { Portal } from '@material-ui/core';
 
 
 
@@ -28,56 +29,34 @@ export default function IconLabelButtons(props) {
 
   const routeChange = () => {
 
-<<<<<<< HEAD
-    if (props.id === 'Farmhouses') {
-      history.push('/view/farmhouse')
+    if(props.id != ""){
+      history.push('/view/category/'+props.id)
     }
-    else if (props.id === 'Beach Hut') {
-      history.push('/view/beachhut')
-    }
-    else if (props.id === 'Hotels') {
-      history.push('/view/hotel')
-    }
-    else if (props.id === 'Caterers') {
-      history.push('/view/caterer')
-    }
-    else if (props.id === 'Event Decorators') {
-      history.push('/view/eventdecorator')
-    }
-    else if (props.id === 'Photogrphers') {
-      history.push('/view/photographer')
-    }
-    else if (props.id === 'Transporation') {
-      history.push('/view/transport')
-    }
-    else if (props.id === 'Lawns and Banquets') {
-=======
-    if (props.id === 'farmhouse') {
-      history.push('/view/farmhouse')
-    }
-    else if (props.id === 'beachHut') {
-      history.push('/view/beachhut')
-    }
-    else if (props.id === 'hotel') {
-      history.push('/view/hotel')
-    }
-    else if (props.id === 'caterer') {
-      history.push('/view/caterer')
-    }
-    else if (props.id === 'eventdecorator') {
-      history.push('/view/eventdecorator')
-    }
-    else if (props.id === 'photographer') {
-      history.push('/view/photographer')
-    }
-    else if (props.id === 'transport') {
-      history.push('/view/transport')
-    }
-    else if (props.id === 'lawnandbanquet') {
->>>>>>> 75f5a1e0c16b8139c352adf3fb6cd94a263766dc
-      history.push('/view/lawnandbanquet')
+    // if (props.id === 'farm') {
+    //   history.push('/view/farmhouse')
+    // }
+    // else if (props.id === 'beachhut') {
+    //   history.push('/view/beachhut')
+    // }
+    // else if (props.id === 'hotel') {
+    //   history.push('/view/hotel')
+    // }
+    // else if (props.id === 'caterer') {
+    //   history.push('/view/caterer')
+    // }
+    // else if (props.id === 'eventdecorator') {
+    //   history.push('/view/eventdecorator')
+    // }
+    // else if (props.id === 'photographer') {
+    //   history.push('/view/photographer')
+    // }
+    // else if (props.id === 'transport') {
+    //   history.push('/view/transport')
+    // }
+    // else if (props.id === 'lawn and banuqet') {
+    //   history.push('/view/lawnandbanquet')
 
-    }
+    // }
   }
 
   return (

@@ -4,7 +4,9 @@ import { Container, Form, Row, Col, Button } from "react-bootstrap";
 import Input from "../../components/UI/Input";
 import { isUserLoggedIn, login } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router";
+import { Redirect , useHistory } from "react-router";
+import axios from "axios";
+import { VENDOR_LOGIN_API } from "../../components/commonFunction/Api";
 
 
 export default function Signin() {
@@ -14,7 +16,8 @@ export default function Signin() {
   const auth = useSelector(state => state.auth);
 
   const dispatch = useDispatch();
-
+ 
+  const history = useHistory();
   useEffect(() =>{
     if(!auth.authenticate){
     dispatch(isUserLoggedIn());
@@ -30,9 +33,13 @@ export default function Signin() {
     dispatch(login(user));
     }
 
+    
     if(auth.authenticate){
-      return <Redirect to = {'/'} />
+ 
+      window.location.href = '/';
     }
+
+
 
   return (
     <div>
@@ -43,7 +50,7 @@ export default function Signin() {
             <h1 style={{marginTop: "25px"}}>Vendor Sign In</h1>
             <br></br>
             <br></br>
-              <Form onSubmit={userLogin}>
+              <Form>
                 <Input
                   label="Email address"
                   placeholder="Enter email address"
@@ -59,7 +66,7 @@ export default function Signin() {
                   type="password"
                   onChange={(e) => setPassword(e.target.value)}
                 />
-                <Button variant="primary" type="submit">
+                <Button variant="primary" type="submit" onClick={userLogin} >
                   Submit
                 </Button>
               </Form>

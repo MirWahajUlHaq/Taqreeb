@@ -10,7 +10,11 @@ import { getAllCategory } from '../../actions/';
 
 const Category = (props) => {
   const category = useSelector(state => state.category);
+
+
+  
   const [categoryName, setCategoryName] = useState('');
+  const [randomNumber, setRandomNumber] = useState('');
   // const [categorySlug, setCategorySlug] = useState('');
   const [categoryImage, setCategoryImage] = useState('');
   const [show, setShow] = useState(false);
@@ -21,31 +25,28 @@ const Category = (props) => {
 
   const handleClose = (e) => {
     e.preventDefault();
-    // const form = new FormData();
-    // form.append('name', categoryName);
-    // // form.append('slug',categorySlug)
-    // form.append('categoryImage', categoryImage);
-    // console.log(form.get(categoryName));
     const name = categoryName;
     const category = {
       name
     }
-    console.log(category);
     dispatch(addCategory(category));
-    // const cat = {
-    //   categoryName,
-    //   categoryImage
-    // };
+    setTimeout(() => {
+      dispatch(getAllCategory());
+      
+    }, 1000);
     setShow(false);
+    setCategoryName('');
   }
   const handleShow = () => setShow(true);
 
   const renderCategories = (categories) => {
+
+ 
     let myCategories = [];
     for (let category of categories) {
       myCategories.push(
-        <li key={category.name}>
-          {category.name}
+        <li key={category.categoryName}>
+          {category.categoryName}
         </li>
       );
     }
@@ -76,7 +77,7 @@ const Category = (props) => {
       <MDBListGroupItem>Vestibulum at eros</MDBListGroupItem> */}
           </MDBListGroup>
         </Container>
-        <Modal show={show} onHide={handleClose}>
+        <Modal show={show} onHide={(e) => setShow(false) }>
           <Modal.Header closeButton>
             <Modal.Title>Add New Category</Modal.Title>
           </Modal.Header>
@@ -86,12 +87,7 @@ const Category = (props) => {
               type={String}
               placeholder={`Category Name`}
               onChange={(e) => setCategoryName(e.target.value)}>
-              </Input>
-            {/* <Input value = {categorySlug}
-                type = {String}
-              placeholder = {`Category Slug`}
-              onChange = {(e) => setCategorySlug(e.target.value)} /> */}
-            <Input type="file" placeholder={`Category Image`} name="categoryImage" onChange={handleCategoryImage} />
+              </Input> 
           </Modal.Body>
           <Modal.Footer>
             <Button variant="primary" onClick={handleClose}>

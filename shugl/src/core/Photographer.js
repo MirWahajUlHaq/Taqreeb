@@ -19,24 +19,65 @@ import { FaShuttleVan, FaCamera } from 'react-icons/fa';
 import {GiHut, GiBalloons} from 'react-icons/gi'
 import HotelIcon from '@material-ui/icons/Hotel';
 import FastfoodIcon from '@material-ui/icons/Fastfood';
+import { global } from "../config";
 
-const categories = () => (
-    <div className='container' style={{marginBottom:'2rem'}}>
-        <h3>Categories</h3>
-        <div className='row'>
-            <CategoriesButtons id='beachHut' startIcon={<GiHut /> } name = 'Beach Hut' />
-            <CategoriesButtons id='transport' startIcon = {<FaShuttleVan />} name='Transporation'/>
-            <CategoriesButtons id='hotel' startIcon = {<HotelIcon />} name='Hotels' />
-            <CategoriesButtons id='photographer' startIcon = {<FaCamera />} name='Photogrphers'/>
-            <CategoriesButtons id='caterer' startIcon = {<FastfoodIcon />} name='Caterers' />
-            <CategoriesButtons id='lawnandbanquet' startIcon = {<HotelIcon />} name='Lawns and Banquets' />
-            <CategoriesButtons id='farmhouse' startIcon = {<HotelIcon />} name='Farmhouses' />
-            <CategoriesButtons id='eventdecorator' startIcon = {<GiBalloons />} name = 'Event Decorators' />
-        </div>
-    </div>
-)
+
 
 export const Photographer = () => {
+
+    const [category, setCategory] = useState([]);
+    const [photographer, setPhotographer] = useState([]);
+
+    useEffect(() => {
+        getCategories();
+        getPhotographer();
+      },[]);
+
+      const getCategories = () => {
+        fetch(`${global.API_HOST}user/getCategory`, {
+          method: "POST",
+        })
+          .then((res) => res.json())
+          .then((response) => {
+            if(response.status == true){
+              setCategory(response.data);
+            }
+          })
+          .catch((err) => console.log(err));
+      };
+
+      const getPhotographer = () => {
+        fetch(`${global.API_HOST}user/getCategory/photographer`, {
+          method: "POST",
+        })
+          .then((res) => res.json())
+          .then((response) => {
+            if (response.status == true) {
+              setPhotographer(response.data);
+            }
+          })
+          .catch((err) => console.log(err));
+      };
+
+    const categories = () => (
+        <div className='container' style={{marginBottom:'2rem'}}>
+            <h3>Categories</h3>
+            {category && category.length > 0 && (
+            <div className='row'>
+            {category.map((cat, index) => (
+                  <CategoriesButtons
+                    id={cat.categoryName}
+                    startIcon={<GiHut />}
+                    name={cat.categoryName}
+                    key={index}
+                  />
+    
+                  ))}
+               
+            </div>
+              )}
+        </div>
+    )
 
     /*const [categories, setCategories] = useState([])
     const [error, setError] = useState(false)
@@ -135,21 +176,20 @@ export const Photographer = () => {
                 <div className='col col-md-8'>
                     {categories()}
                     <h3>All</h3>
-                    <div className='row'>
-                        <ProductReviewCard name = "Mohsee Photographers" price = '2800/per person' imgUrl={mohsee} address= "Malir, Karachi" description = 'This impressive paella is a perfect party dish and a fun meal to cook together with your guests Add one cup of frozen peas along with the mussels if you like' />
-                        <ProductReviewCard name = "Alam Photographers " price = '1500/per person' imgUrl={alam} address= "Super Highway, Karachi" description='This impressive paella is a perfect party dish and a fun meal to cook together with your guests. Add 1 cup of frozen peas along with the mussels, if you like.' />
-                        <ProductReviewCard name = "Arsalan Zafar Photographers" price = '1100/per person' imgUrl= {arsalan}  address= "Super Highway, Karachi" description ='This impressive paella is a perfect party dish and a fun meal to cook together with your guests. Add 1 cup of frozen peas along with the mussels, if you like.' />
-                    </div>
-                    <div className='row'>
-                        <ProductReviewCard name = "CineSnapp Photographers" price = '2800/per person' imgUrl={cine} address= "Malir, Karachi" description = 'This impressive paella is a perfect party dish and a fun meal to cook together with your guests Add one cup of frozen peas along with the mussels if you like' />
-                        <ProductReviewCard name = "Cosmo Photographers" price = '1500/per person' imgUrl={cosmo} address= "Super Highway, Karachi" description='This impressive paella is a perfect party dish and a fun meal to cook together with your guests. Add 1 cup of frozen peas along with the mussels, if you like.' />
-                        <ProductReviewCard name = "Illusion Photographers" price = '1100/per person' imgUrl= {illusion}  address= "Super Highway, Karachi" description ='This impressive paella is a perfect party dish and a fun meal to cook together with your guests. Add 1 cup of frozen peas along with the mussels, if you like.' />
-                    </div>
-                    <div className='row'>
-                        <ProductReviewCard name = "RJ Photographers" price = '1100/per person' imgUrl={rj} address= "Malir, Karachi" description = 'This impressive paella is a perfect party dish and a fun meal to cook together with your guests Add one cup of frozen peas along with the mussels if you like' />
-                        <ProductReviewCard name = "Salogis Photographers" price = '1100/per person' imgUrl={salogis} address= "Super Highway, Karachi" description='This impressive paella is a perfect party dish and a fun meal to cook together with your guests. Add 1 cup of frozen peas along with the mussels, if you like.' />
-                        <ProductReviewCard name = "The Torque Photographers" price = '1100/per person' imgUrl= {torque}  address= "Super Highway, Karachi" description ='This impressive paella is a perfect party dish and a fun meal to cook together with your guests. Add 1 cup of frozen peas along with the mussels, if you like.' />
-                    </div>
+                    {photographer && photographer.length > 0 && (
+        <div className="row">
+          {photographer.map((photographerPro, index) => (
+            <ProductReviewCard
+              name={photographerPro.productName}
+              price={`${photographerPro.productPrice}/-per person`}
+              imgUrl={global.imgUrl + photographerPro.productImage}
+              // address="Malir, Karachi"
+              url={photographerPro._id}
+              description={photographerPro.description}
+            />
+          ))}
+        </div>
+      )}
                 </div>
             </div>
         </div>

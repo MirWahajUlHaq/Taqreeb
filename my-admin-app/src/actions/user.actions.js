@@ -1,5 +1,9 @@
 import { authConstants, userConstants } from "./constants";
+import toastr from "toastr";
+import "toastr/build/toastr.min.css";
 import axios from "../helpers/axios";
+import { USER_ADD_API, USER_LIST_API } from "../components/commonFunction/Api";
+import { getCommonHeaders_res } from "../components/commonFunction/CommonMethod";
 
 
 export const signup = (user) => {
@@ -52,15 +56,20 @@ export const signup = (user) => {
 }
 
 export const userCreateAdmin = (newObj) => {
-  console.log('asdasda',newObj)
-
+  
+  const headers = getCommonHeaders_res();
+  const config = {
+    headers,
+  };
+  
+   
   return async (dispatch) => {
     try {
-
       // dispatch({ type: productConstants.ADD_PRODUCT_REQUEST });
-      const res = await axios.post(`admin/userCreate`, newObj);
+      const res = await axios.post(USER_ADD_API,newObj,{headers: config.headers});
       if (res.status === 200) {
         // dispatch({ type: productConstants.ADD_PRODUCT_SUCCESS });
+        toastr.success("User Added Successfully");
         dispatch(getUsers());
       } else {
         // dispatch({ type: productConstants.ADD_PRODUCT_FAILURE });
@@ -75,14 +84,20 @@ export const userCreateAdmin = (newObj) => {
 
 export const getUsers = () => {
   return async (dispatch) => {
+
+    const headers = getCommonHeaders_res();
+    const config = {
+      headers,
+    };
+    
+
     try {
       dispatch({ type: userConstants.GET_ALL_USERS_REQUEST });
 
-      const res = await axios.post(`admin/getUsers`);
-      if (res.status === 200) {
-        const { users } = res.data;
-      console.log('adasdasd',users)
+      const res = await axios.post(USER_LIST_API,{},{headers: config.headers});
 
+      if (res.status === 200) {
+        const users = res.data.data;
         dispatch({
           type: userConstants.GET_ALL_USERS_SUCCESS,
           payload: { users }

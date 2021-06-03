@@ -38,7 +38,7 @@ const Routes = () => {
                 <Route path='/signup' exact component={Signup} />
                 <Route path='/vendorRegister' exact component={vendorRegister} />
                 <Route path='/vendorListingScreen' exact component={VendorListingScreen} />
-                <PrivateRoute path='/user/profile' exact component={Dashboard} />
+                <Route path='/user/profile' exact component={Dashboard} />
                 <AdminRoute path='/admin/dashboard' exact component={AdminDashboard} />
                 <AdminRoute path='/create/category' exact component={AddCategory} />
                 <VendorRoute path='/vendor/dashboard' exact component={VendorDashboard} />
@@ -46,15 +46,16 @@ const Routes = () => {
                 <Route path='/create/farmhouse' exact component={MultiStepForm} />
                 <Route path='/create/catering' exact component={CaterersMultiStepForm} />
 
-                <Route path='/view/farmhouse' exact component={Farm} />
+                {/* <Route path='/view/farmhouse' exact component={Farm} />
                 <Route path='/view/photographer' exact component={Photographer} />
                 <Route path='/view/eventdecorator' exact component={Decorator} />
                 <Route path='/view/hotel' exact component={Hotel} />
                 <Route path='/view/beachhut' exact component={BeachHut} />
                 <Route path='/view/caterer' exact component={Caterer} />
                 <Route path='/view/lawnandbanquet' exact component={LawnAndBanuqet} />
-                <Route path='/view/transport' exact component={Transport} />
-                <Route path='/view/productPage' exact component={ProductPage} />
+                <Route path='/view/transport' exact component={Transport} /> */}
+                <Route path='/view/category/:id' exact component={BeachHut} />
+                <Route path='/view/productPage/:id' exact component={ProductPage} />
                 <Route path='/view/checkout' exact component={CheckOut} />
 
             </Switch>

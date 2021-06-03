@@ -1,5 +1,6 @@
 import React, { useState , useEffect } from "react";
-import Layout from "../../components/VendorLayout";
+import AdminLayout from '../../components/AdminLayout'
+
 import { Container, Row, Col, Table } from "react-bootstrap";
 import Input from "../../components/UI/Input";
 import Modal from "../../components/UI/Modal";
@@ -46,6 +47,7 @@ const Products = (props) => {
 
   const handleClose = () => {
     setShow(false);
+    
   };
 
 
@@ -93,18 +95,18 @@ const Products = (props) => {
           </tr>
         </thead>
         <tbody>
-          {product.users.length > 0
-            ? product.users.map((user) => (
+          {product.users && product.users.length > 0
+            ? product.users.map((user,key) => (
                 <tr key={user._id}>
-                  <td>{user._id}</td>
+                  <td>{key+1}</td>
                   <td>{user.firstName} </td>
                   <td>{user.email}</td>
                   <td>{user.role == "0" ? 'User' : user.role =="1" ? 'Vendor' : 'Admin'}</td>
                   <td>
-                    <button onClick={() => showProductDetailsModal(user)}>
+                    <button onClick={() => showProductDetailsModal(user)} class="btn btn-md btn-primary">
                       info
                     </button>
-                    <button
+                    {/* <button
                       onClick={() => {
                         const payload = {
                           productId: product._id,
@@ -113,11 +115,11 @@ const Products = (props) => {
                       }}
                     >
                       del
-                    </button>
+                    </button> */}
                   </td>
                 </tr>
               ))
-            : null}
+            : (<tr><td colspan="5" class="text-center p-4 bold">No Users</td></tr>)}
         </tbody>
       </Table>
     );
@@ -216,13 +218,13 @@ const Products = (props) => {
     );
   };
   return (
-    <Layout>
+    <AdminLayout>
       <Container>
         <Row>
           <Col md={12}>
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <div style={{ display: "flex", justifyContent: "space-between" }} class="m-3">
               <h3>Users</h3>
-              <button onClick={handleShow}>Add Users</button>
+              <button onClick={handleShow} class="btn btn-md btn-warning">Add Users</button>
             </div>
           </Col>
         </Row>
@@ -232,7 +234,7 @@ const Products = (props) => {
       </Container>
       {renderAddProductModal()}
       {renderProductDetailsModal()}
-    </Layout>
+    </AdminLayout>
   );
 };
 

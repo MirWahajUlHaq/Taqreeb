@@ -6,7 +6,6 @@ import { adminlogin, isUserLoggedIn} from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router";
 
-
 export default function Signin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -31,7 +30,9 @@ export default function Signin() {
     }
 
     if(auth.authenticate){
-      return <Redirect to = {'/admin'} />
+
+ 
+        window.location.href = '/admin';
     }
 
   return (

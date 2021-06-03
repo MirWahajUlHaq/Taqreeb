@@ -1,11 +1,12 @@
 import React, { useState } from "react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import VendorLayout from "../../components/VendorLayout";
 import { Container, Form, Row, Col, Button } from "react-bootstrap";
 import Input from "../../components/UI/Input";
 import {Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { signup } from "../../actions";
-
 
 const Signup = (props) => {
   
@@ -23,6 +24,11 @@ const Signup = (props) => {
       firstName, lastName, phone, email, password
     }
     dispatch(signup(user));
+    setFirstName('');
+    setlastName('');
+    setPhone('');
+    setEmail('');
+    setPassword('');
   }
 
   if(auth.authenticate){
@@ -87,6 +93,7 @@ const Signup = (props) => {
             </Col>
           </Row>
         </Container>
+       
       </VendorLayout>
     </div>
   );
