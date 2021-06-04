@@ -153,6 +153,7 @@ const Signup = () => {
       </div>
       <button
         className="btn btn-primary"
+        style={{color:'#d6324a'}}
         type="submit" /*onClick={clickSubmit}*/
       >
         Sign Up
@@ -182,7 +183,7 @@ const Signup = () => {
   return (
     <Layout
       title="Sign Up page"
-      description="Sign Up to Shugl"
+      description="Sign Up"
       className="container col-md-4 offset-md-4"
     >
       {showSuccess}

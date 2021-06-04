@@ -11,11 +11,13 @@ const Vendor = () => {
 
     const values=['Farmhouse', 'Beach Hut', 'Hotel', 'Catering Service', 'Photography sevice', 'Event Decorator Service']
 
+    const userData = JSON.parse(localStorage.getItem("userDetails"));
+    console.log('userData',userData)
     const registration = () => (
         <div>
             <div className='container'>
                 <div className='row justify-content-center'>
-                    <h1 className='heading col-md-7 offset-md-'>Hi, Mir Wahaj Ul Haq, list your {values[0]}</h1>
+                    <h1 className='heading col-md-7 offset-md-'>Hi, {userData && userData.name ? userData.name: ''} </h1>
                     <Card style={{ width: '18rem' }} className='col-md-3' >
                         <Card.Body>
                             <Card.Title><b>Create new listing</b></Card.Title>
@@ -30,7 +32,10 @@ const Vendor = () => {
                             <Card.Text>
                             By continuing, you agree to let Shugl.com email you re  garding your service registration.
                             </Card.Text>
-                            <Button variant="primary" ><Link to='/vendorRegister'>Get Started</Link></Button>
+                            <Button variant="primary" >
+                                {/* <Link to='/vendorRegister'>Get Started</Link> */}
+                                <a href="http://localhost:4000/vendor/signin" target="_blank" >Get Started</a>
+                                </Button>
                         </Card.Body>
                     </Card>
                 </div>
@@ -45,7 +50,7 @@ const Vendor = () => {
                     <li><b>Report guest misconduct</b> if something goes wrong</li>
                     <li>Access<b>24/7 support</b></li>
                 </ul>
-                <button className='btn btn-outline btn-primary'> Learn More</button>
+                {/* <button className='btn btn-outline btn-primary'> Learn More</button> */}
             </div>
             <br/>
             <br/>

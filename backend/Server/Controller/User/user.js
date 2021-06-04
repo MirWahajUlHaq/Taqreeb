@@ -140,7 +140,7 @@ searchProducts= async (req, res) => {
 
 filterProducts= async (req, res) => {
 
-  let requiredFields = ["lowPrice","highPrice"];
+  let requiredFields = ["lowPrice","highPrice","categoryId"];
   let validator = helpers.validateParams(req, requiredFields);
   if (!validator.status) {
     return res.status(203).send({

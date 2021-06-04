@@ -62,6 +62,37 @@ const Menu = (props) => {
   return (
     <div>
       <ul className="nav nav-tabs " style={{ backgroundColor: "#D6324A" }}>
+      <div class="left_side">
+        <li className="nav-item">
+          <div class="search-box">
+            <input
+              type="text"
+              class="search-input"
+              placeholder="Search.."
+              onChange={handleOnchange}
+              style={{marginRight:"200px"}}
+            />
+
+            {/* <button class="search-button">
+              
+              search
+            </button> */}
+          </div>
+          {searchResult && searchResult.length > 0 ? (
+
+            <ul className="searchResult">
+              {searchResult.map((searchRes, index) => (
+                <li>
+                  <Link to={`/view/productPage/${searchRes._id}`} >
+                    {searchRes.productName}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          ) : ""}
+        </li>
+        </div>
+        <div class="right_side">
         <li className="nav-item">
           <Link
             className="nav-link"
@@ -89,33 +120,7 @@ const Menu = (props) => {
             About
           </Link>
         </li>
-        <li className="nav-item">
-          <div class="search-box">
-            <input
-              type="text"
-              class="search-input"
-              placeholder="Search.."
-              onChange={handleOnchange}
-            />
-
-            {/* <button class="search-button">
-              
-              search
-            </button> */}
-          </div>
-          {searchResult && searchResult.length > 0 ? (
-
-            <ul className="searchResult">
-              {searchResult.map((searchRes, index) => (
-                <li>
-                  <Link to={`/view/productPage/${searchRes._id}`} >
-                    {searchRes.productName}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          ) : ""}
-        </li>
+       
         {/* {isAuthenticated() && isAuthenticated().role ===0 && (
                     <li className='nav-item'>
                     <Link className='nav-link' style={isActive(props.history, '/user/profile')} to='/user/profile'>Profile</Link>
@@ -156,6 +161,7 @@ const Menu = (props) => {
             </li>
           </Fragment>
         )}
+         </div>
 
         {userData && (
           <div className="userNav">

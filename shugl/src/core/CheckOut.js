@@ -197,7 +197,7 @@ export const CheckOut = () => {
                 <p>{product.productName}</p>
               </div>
               <div className="col col-md-2" style={{ marginLeft: "7rem" }}>
-                <p>{`Rs.${product.price}/-`}</p>
+                <p>{`USD.${product.price}/-`}</p>
               </div>
             </div>
             <div className="row" style={{ marginTop: "1rem" }}>
@@ -206,7 +206,7 @@ export const CheckOut = () => {
               </div>
               <div className="col col-md-2">
                 <div style={{ marginLeft: "7rem" }}>
-                  <p>Rs.0/-</p>
+                  <p>USD.0/-</p>
                 </div>
               </div>
             </div>

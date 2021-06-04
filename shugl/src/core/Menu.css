@@ -69,12 +69,19 @@ ul li ul.dropdown li{
   display: block;
 }
 
-.userNav {
-  position: absolute;
-  right: 20px;
+.left_side {
+  display: block;
+  margin-left: auto;
 }
 
-/* search */
+.right_side {
+  float: right;
+}
+.userNav {
+  margin-right: 32px;
+  right: 40px;
+}
+
 
 .search-box{
   width: 100%;

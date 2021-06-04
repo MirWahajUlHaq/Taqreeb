@@ -562,7 +562,7 @@ searchProducts = async (data) => {
 
 filterProducts = async (data) => {
   
-  let queryObject = { status: { $eq: 1 }, productPrice : { $gt :  data.lowPrice, $lt : data.highPrice} };
+  let queryObject = { status: { $eq: 1 }, categoryId :ObjectId(data.categoryId), productPrice : { $gt :  data.lowPrice, $lt : data.highPrice} };
   
    
     let result = await getDataArray(

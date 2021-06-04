@@ -99,11 +99,16 @@ const Signin = () => {
       </div>
       <button
         className="btn btn-primary btn-outline"
+        style={{color:'#d6324a'}}
         type="submit" /*onClick={clickSubmit}*/
       >
         Signin
         {/* <Link to="/">Signin</Link> */}
       </button>
+      <hr></hr>
+      <div className="form-group">
+      Don't have a account? <Link style={{color:'#d6324a'}} to='/signup'>SignUp Now</Link>
+      </div>
     </form>
   );
 
@@ -144,7 +149,7 @@ const Signin = () => {
   return (
     <Layout
       title="Signin Page"
-      description="Signin to Shugl"
+      description="Signin "
       className="container col-md-4 offset-md-4"
     >
       {showLoading()}

@@ -260,7 +260,7 @@ const Home = () => {
   );
 
   return (
-    <Layout title="Shugl Home" description="Scene on hai!">
+    <Layout title="Taqreeb Home" description="Scene on hai!">
       {categories()}
       {homeBody()}
     </Layout>

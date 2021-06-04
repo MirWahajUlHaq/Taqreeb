@@ -122,7 +122,7 @@ export const ProductPage = (props) => {
           style={{ textAlign: "right", paddingRight: "2rem" }}
         >
           <h4>
-            <b>{`Rs.${product.productPrice}/- `}</b>
+            <b>{`USD.${product.productPrice}/- `}</b>
             {/* <p style={{ color: "grey" }}>/12hr</p> */}
           </h4>
         </div>

@@ -93,7 +93,8 @@ export const BeachHut = (props) => {
 
       const bodyParameter = {
         lowPrice: minValue,
-        highPrice: maxValue
+        highPrice: maxValue,
+        categoryId: props.match.params.id
       };
 
       const res = await axios.post(

@@ -7,7 +7,7 @@ exports.createPaymentIntent = async (req, res) => {
 	// Create a PaymentIntent with the order amount and currency
 	const paymentIntent = await stripe.paymentIntents.create({
 		amount: items[0].amount,
-		currency: "INR",
+		currency: "USD",
 		description: "Credit Purchase",
 	});
 	res.send({
